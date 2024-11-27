@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3c17e448-55e9-473d-8751-b9a85350f872" name="Changes" comment="0.2.1: Добавлены model product, CRUD для product в routes, product_repo" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;YuraGolyshev&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/YuraGolyshev/projectTP.git&quot;,
+    &quot;accountId&quot;: &quot;98324129-8de2-42bf-8863-b4ce7de95abb&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2p4zWjI5SQadbQScfSDlxYfj6ET" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/Юрий/Desktop/Project_TP/Project_TP"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Юрий\Desktop\ProjectTP\ProjectForTP\src\project\infrastructure\postgres\repository" />
+      <recent name="C:\Users\Юрий\Desktop\ProjectTP\ProjectForTP\src\project\infrastructure\postgres" />
+      <recent name="C:\Users\Юрий\Desktop\ProjectTP\ProjectForTP\src\project\schemas" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Юрий\Desktop\ProjectTP\ProjectForTP" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-0e3be3396995-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23339.19" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3c17e448-55e9-473d-8751-b9a85350f872" name="Changes" comment="" />
+      <created>1732040168243</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732040168243</updated>
+    </task>
+    <task id="LOCAL-00001" summary="0.0.1: initial commit">
+      <option name="closed" value="true" />
+      <created>1732738084002</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1732738084002</updated>
+    </task>
+    <task id="LOCAL-00002" summary="0.1.0: добавлен client.py в schemas">
+      <option name="closed" value="true" />
+      <created>1732738599605</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1732738599605</updated>
+    </task>
+    <task id="LOCAL-00003" summary="0.2.0: Добавлены model product, CRUD для product в routes, product_repo">
+      <option name="closed" value="true" />
+      <created>1732739376017</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1732739376017</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="0.0.1: initial commit" />
+    <MESSAGE value="0.1.0: добавлен client.py в schemas" />
+    <MESSAGE value="0.2.0: Добавлены model product, CRUD для product в routes, product_repo" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.2.0: Добавлены model product, CRUD для product в routes, product_repo" />
+  </component>
+</project>
