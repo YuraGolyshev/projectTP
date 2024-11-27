@@ -7,3 +7,14 @@ from project.schemas.client import ClientSchema
 
 router = APIRouter()
 
+
+@router.get("/all_clients", response_model=list[ClientSchema])
+async def get_all_clients() -> list[ClientSchema]:
+    client_repo = ClientRepository()
+    database = PostgresDatabase()
+
+    async with database.session() as session:
+        await client_repo.check_connection(session=session)
+        all_clients = await client_repo.get_all_clients(session=session)
+
+    return all_clients
