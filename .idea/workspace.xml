@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3c17e448-55e9-473d-8751-b9a85350f872" name="Changes" comment="0.0.1: initial commit">
+    <list default="true" id="3c17e448-55e9-473d-8751-b9a85350f872" name="Changes" comment="0.1.0: В schemas добавлена таблица client">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Changelog.md" beforeDir="false" afterPath="$PROJECT_DIR$/Changelog.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alembic.ini" beforeDir="false" afterPath="$PROJECT_DIR$/alembic.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,13 +41,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/Юрий/Desktop/Project_TP/Project_TP"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Юрий/Desktop/Project_TP/Project_TP&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Юрий\Desktop\ProjectTP\ProjectForTP\src\project\infrastructure\postgres\repository" />
@@ -52,6 +55,9 @@
       <recent name="C:\Users\Юрий\Desktop\ProjectTP\ProjectForTP\src\project\schemas" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Юрий\Desktop\Project_TP\Project_TP\src\project\infrastructure\postgres\repository" />
+      <recent name="C:\Users\Юрий\Desktop\Project_TP\Project_TP\src\project\infrastructure\postgres" />
+      <recent name="C:\Users\Юрий\Desktop\Project_TP\Project_TP\src\project\schemas" />
       <recent name="C:\Users\Юрий\Desktop\ProjectTP\ProjectForTP" />
     </key>
   </component>
@@ -103,7 +109,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732741339240</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="0.1.0: В schemas добавлена таблица client">
+      <option name="closed" value="true" />
+      <created>1732741782879</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732741782880</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -121,6 +135,7 @@
     <MESSAGE value="0.1.0: добавлен client.py в schemas" />
     <MESSAGE value="0.2.0: Добавлены model product, CRUD для product в routes, product_repo" />
     <MESSAGE value="0.0.1: initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.1: initial commit" />
+    <MESSAGE value="0.1.0: В schemas добавлена таблица client" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.1.0: В schemas добавлена таблица client" />
   </component>
 </project>
