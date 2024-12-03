@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3c17e448-55e9-473d-8751-b9a85350f872" name="Changes" comment="0.1.0: В schemas добавлена таблица client">
+    <list default="true" id="3c17e448-55e9-473d-8751-b9a85350f872" name="Changes" comment="1.0.0: Docker запускается, swagger открывается">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Changelog.md" beforeDir="false" afterPath="$PROJECT_DIR$/Changelog.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alembic.ini" beforeDir="false" afterPath="$PROJECT_DIR$/alembic.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -117,7 +115,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732741782880</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="1.0.0: Docker запускается, swagger открывается">
+      <option name="closed" value="true" />
+      <created>1732745115544</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732745115544</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -136,6 +142,7 @@
     <MESSAGE value="0.2.0: Добавлены model product, CRUD для product в routes, product_repo" />
     <MESSAGE value="0.0.1: initial commit" />
     <MESSAGE value="0.1.0: В schemas добавлена таблица client" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.1.0: В schemas добавлена таблица client" />
+    <MESSAGE value="1.0.0: Docker запускается, swagger открывается" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.0.0: Docker запускается, swagger открывается" />
   </component>
 </project>
