@@ -9,12 +9,12 @@ class Settings(BaseSettings):
     ENV: str = "DEV"
     LOG_LEVEL: str = "DEBUG"
 
-    POSTGRES_SCHEMA: str = "my_app_schema"
-    POSTGRES_HOST: str = "localhost"
-    POSTGRES_DB: str = "postgres"
-    POSTGRES_PORT: int = 5432
-    POSTGRES_USER: SecretStr = "postgres"
-    POSTGRES_PASSWORD: SecretStr = "postgres"
+    POSTGRES_SCHEMA: str
+    POSTGRES_HOST: str
+    POSTGRES_DB: str
+    POSTGRES_PORT: int
+    POSTGRES_USER: SecretStr
+    POSTGRES_PASSWORD: SecretStr
     POSTGRES_RECONNECT_INTERVAL_SEC: int = 1
 
     @property

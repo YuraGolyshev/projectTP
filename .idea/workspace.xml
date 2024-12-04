@@ -5,13 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3c17e448-55e9-473d-8751-b9a85350f872" name="Changes" comment="1.0.0: Docker запускается, swagger открывается">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Project_TP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Project_TP.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Changelog.md" beforeDir="false" afterPath="$PROJECT_DIR$/Changelog.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migration/versions/9d09e1cb9b76_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/migration/versions/9d09e1cb9b76_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/api/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/api/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/core/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/core/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/infrastructure/postgres/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/infrastructure/postgres/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -43,7 +57,8 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Юрий/Desktop/Project_TP/Project_TP&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Project_TP&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
   <component name="RecentsManager">

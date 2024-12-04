@@ -29,7 +29,14 @@ def upgrade():
     sa.UniqueConstraint('email'),
     schema=settings.POSTGRES_SCHEMA
     )
+    op.create_table('producers',
+    sa.Column('id',sa.Integer(), nullable=False),
+    sa.Column('name', sa.String().with_variant(sa.String(length=255), 'postgresql'), nullable=False),
+    sa.PrimaryKeyConstraint('id'),
+    schema=settings.POSTGRES_SCHEMA
+    )
 
 
 def downgrade():
     op.drop_table('clients', schema=settings.POSTGRES_SCHEMA)
+    op.drop_table('producers', schema=settings.POSTGRES_SCHEMA)
