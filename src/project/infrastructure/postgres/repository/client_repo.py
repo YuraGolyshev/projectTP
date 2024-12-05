@@ -31,4 +31,3 @@ class ClientRepository:
         clients = await session.execute(text(query))
 
         return [ClientSchema.model_validate(obj=client) for client in clients.mappings().all()]
-
