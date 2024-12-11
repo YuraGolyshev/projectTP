@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3c17e448-55e9-473d-8751-b9a85350f872" name="Changes" comment="1.1.6: Добавил файлы, которые должны были быть в прошлом коммите">
-      <change beforePath="$PROJECT_DIR$/.idea/Project_TP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Project_TP.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Changelog.md" beforeDir="false" afterPath="$PROJECT_DIR$/Changelog.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migration/README" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migration/env.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migration/script.py.mako" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migration/versions/9d09e1cb9b76_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migration/versions/e1bac34b0063_test.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/project/api/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/api/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/core/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/core/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/infrastructure/postgres/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/infrastructure/postgres/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/project/infrastructure/postgres/repository/client_repo.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/infrastructure/postgres/repository/client_repo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/infrastructure/postgres/repository/producers_repo.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/infrastructure/postgres/repository/producers_repo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,14 +53,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Project_TP",
-    "settings.editor.selected.configurable": "terminal"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Project_TP&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Юрий\Desktop\ProjectTP\ProjectForTP\src\project\infrastructure\postgres\repository" />
