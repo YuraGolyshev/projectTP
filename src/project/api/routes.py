@@ -31,6 +31,7 @@ from project.schemas.user import UserSchema
 from project.schemas.login import LoginSchema
 from project.schemas.register import RegisterSchema
 from project.infrastructure.security.auth import get_current_user, allow_only_admin
+
 router = APIRouter()
 
 # Registration of User
@@ -39,8 +40,6 @@ async def register(user: RegisterSchema) -> UserSchema:
     users_repo = UsersRepository()
     database = PostgresDatabase()
 
-    if user.role not in ["user", "admin"]:
-        raise HTTPException(status_code=400, detail="role can be only 'user' or 'admin'")
     async with database.session() as session:
         await users_repo.check_connection(session=session)
         new_user = await users_repo.register_user(session=session,
@@ -48,38 +47,54 @@ async def register(user: RegisterSchema) -> UserSchema:
                                                   email=user.email,
                                                   password=user.password,
                                                   role=user.role)
+
     if not new_user:
         raise HTTPException(status_code=500, detail="Failed to register user")
+
     return new_user
+
 
 @router.post("/login")
 async def login(user: LoginSchema) -> dict:
     users_repo = UsersRepository()
     database = PostgresDatabase()
+
     async with database.session() as session:
         await users_repo.check_connection(session=session)
         auth_response = await users_repo.login_user(session=session, email=user.email, password=user.password)
+
     return auth_response
+
+
 # other Users CRUD
+
 # Получение всех пользователей (доступно всем с ролью user или admin)
 @router.get("/all_users", response_model=list[UserSchema])
 async def get_all_users(current_user: dict = Depends(get_current_user)) -> list[UserSchema]:
     users_repo = UsersRepository()
     database = PostgresDatabase()
+
     async with database.session() as session:
         await users_repo.check_connection(session=session)
         all_users = await users_repo.get_all_users(session=session)
+
     return all_users
+
+
 @router.get("/user/{id}", response_model=UserSchema)
 async def get_user_by_id(id: int) -> UserSchema:
     users_repo = UsersRepository()
     database = PostgresDatabase()
+
     async with database.session() as session:
         await users_repo.check_connection(session=session)
         user = await users_repo.get_user_by_id(session=session, id_user=id)
+
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
+
     return user
+
 
 # Удаление пользователя по id (доступно только admin)
 @router.delete("/user/{id}")
@@ -89,9 +104,11 @@ async def delete_user_by_id(
 ) -> str:
     users_repo = UsersRepository()
     database = PostgresDatabase()
+
     async with database.session() as session:
         await users_repo.check_connection(session=session)
         is_deleted = await users_repo.delete_user_by_id(session=session, id_user=id)
+
     if is_deleted:
         return "User was deleted"
     else:
@@ -127,7 +144,7 @@ async def get_client_by_id(id: int) -> ClientSchema:
 
 
 @router.post("/clients", response_model=ClientSchema)
-async def insert_client(client: ClientSchema) -> ClientSchema:
+async def insert_client(client: ClientSchema, current_user: dict = Depends(allow_only_admin)) -> ClientSchema:
     client_repo = ClientRepository()
     database = PostgresDatabase()
 
@@ -142,7 +159,7 @@ async def insert_client(client: ClientSchema) -> ClientSchema:
 
 
 @router.put("/clients/{id}", response_model=ClientSchema)
-async def update_client_by_id(id: int, client: ClientSchema) -> ClientSchema:
+async def update_client_by_id(id: int, client: ClientSchema, current_user: dict = Depends(allow_only_admin)) -> ClientSchema:
     client_repo = ClientRepository()
     database = PostgresDatabase()
 
@@ -163,7 +180,7 @@ async def update_client_by_id(id: int, client: ClientSchema) -> ClientSchema:
 
 
 @router.delete("/clients/{id}", response_model=dict)
-async def delete_client_by_id(id: int) -> dict:
+async def delete_client_by_id(id: int, current_user: dict = Depends(allow_only_admin)) -> dict:
     client_repo = ClientRepository()
     database = PostgresDatabase()
 
@@ -204,7 +221,7 @@ async def get_producer_by_id(id: int) -> ProducerSchema:
 
 
 @router.post("/producer", response_model=ProducerSchema)
-async def insert_producer(producer: ProducerSchema) -> ProducerSchema:
+async def insert_producer(producer: ProducerSchema, current_user: dict = Depends(allow_only_admin)) -> ProducerSchema:
     producer_repo = ProducerRepository()
     database = PostgresDatabase()
 
@@ -219,7 +236,7 @@ async def insert_producer(producer: ProducerSchema) -> ProducerSchema:
 
 
 @router.put("/producer/{id}", response_model=ProducerSchema)
-async def update_producer(id: int, producer: ProducerSchema) -> ProducerSchema:
+async def update_producer(id: int, producer: ProducerSchema, current_user: dict = Depends(allow_only_admin)) -> ProducerSchema:
     producer_repo = ProducerRepository()
     database = PostgresDatabase()
 
@@ -234,7 +251,7 @@ async def update_producer(id: int, producer: ProducerSchema) -> ProducerSchema:
 
 
 @router.delete("/producer/{id}", response_model=dict)
-async def delete_producer(id: int) -> dict:
+async def delete_producer(id: int, current_user: dict = Depends(allow_only_admin)) -> dict:
     producer_repo = ProducerRepository()
     database = PostgresDatabase()
 
@@ -275,7 +292,7 @@ async def get_product_group_by_id(id: int) -> ProductGroupSchema:
 
 
 @router.post("/product_groups", response_model=ProductGroupSchema)
-async def insert_product_group(product_group: ProductGroupSchema) -> ProductGroupSchema:
+async def insert_product_group(product_group: ProductGroupSchema, current_user: dict = Depends(allow_only_admin)) -> ProductGroupSchema:
     product_groups_repo = ProductGroupRepository()
     database = PostgresDatabase()
 
@@ -290,7 +307,7 @@ async def insert_product_group(product_group: ProductGroupSchema) -> ProductGrou
 
 
 @router.put("/product_groups/{id}", response_model=ProductGroupSchema)
-async def update_product_group_by_id(id: int, product_group: ProductGroupSchema) -> ProductGroupSchema:
+async def update_product_group_by_id(id: int, product_group: ProductGroupSchema, current_user: dict = Depends(allow_only_admin)) -> ProductGroupSchema:
     product_groups_repo = ProductGroupRepository()
     database = PostgresDatabase()
 
@@ -305,7 +322,7 @@ async def update_product_group_by_id(id: int, product_group: ProductGroupSchema)
 
 
 @router.delete("/product_groups/{id}", response_model=dict)
-async def delete_product_group_by_id(id: int) -> dict:
+async def delete_product_group_by_id(id: int, current_user: dict = Depends(allow_only_admin)) -> dict:
     product_groups_repo = ProductGroupRepository()
     database = PostgresDatabase()
 
@@ -346,7 +363,7 @@ async def get_product_by_id(id: int) -> ProductSchema:
 
 
 @router.post("/product", response_model=ProductSchema)
-async def insert_product(product: ProductSchema) -> ProductSchema:
+async def insert_product(product: ProductSchema, current_user: dict = Depends(allow_only_admin)) -> ProductSchema:
     product_repo = ProductRepository()
     database = PostgresDatabase()
 
@@ -361,7 +378,7 @@ async def insert_product(product: ProductSchema) -> ProductSchema:
 
 
 @router.put("/product/{id}", response_model=ProductSchema)
-async def update_product_by_id(id: int, product: ProductSchema) -> ProductSchema:
+async def update_product_by_id(id: int, product: ProductSchema, current_user: dict = Depends(allow_only_admin)) -> ProductSchema:
     product_repo = ProductRepository()
     database = PostgresDatabase()
 
@@ -382,7 +399,7 @@ async def update_product_by_id(id: int, product: ProductSchema) -> ProductSchema
 
 
 @router.delete("/product/{id}", response_model=dict)
-async def delete_product_by_id(id: int) -> dict:
+async def delete_product_by_id(id: int, current_user: dict = Depends(allow_only_admin)) -> dict:
     product_repo = ProductRepository()
     database = PostgresDatabase()
 
@@ -424,7 +441,7 @@ async def get_warehouse_by_id(id: int) -> WarehouseSchema:
 
 
 @router.post("/warehouses", response_model=WarehouseSchema)
-async def insert_warehouse(warehouse: WarehouseSchema) -> WarehouseSchema:
+async def insert_warehouse(warehouse: WarehouseSchema, current_user: dict = Depends(allow_only_admin)) -> WarehouseSchema:
     warehouse_repo = WarehouseRepository()
     database = PostgresDatabase()
 
@@ -439,7 +456,7 @@ async def insert_warehouse(warehouse: WarehouseSchema) -> WarehouseSchema:
 
 
 @router.put("/warehouses/{id}", response_model=WarehouseSchema)
-async def update_warehouse_by_id(id: int, warehouse: WarehouseSchema) -> WarehouseSchema:
+async def update_warehouse_by_id(id: int, warehouse: WarehouseSchema, current_user: dict = Depends(allow_only_admin)) -> WarehouseSchema:
     warehouse_repo = WarehouseRepository()
     database = PostgresDatabase()
 
@@ -460,7 +477,7 @@ async def update_warehouse_by_id(id: int, warehouse: WarehouseSchema) -> Warehou
 
 
 @router.delete("/warehouses/{id}", response_model=dict)
-async def delete_warehouse_by_id(id: int) -> dict:
+async def delete_warehouse_by_id(id: int, current_user: dict = Depends(allow_only_admin)) -> dict:
     warehouse_repo = WarehouseRepository()
     database = PostgresDatabase()
 
@@ -505,7 +522,7 @@ async def get_supplier_by_id(id: int) -> SupplierSchema:
 
 
 @router.post("/suppliers", response_model=SupplierSchema)
-async def insert_supplier(supplier: SupplierSchema) -> SupplierSchema:
+async def insert_supplier(supplier: SupplierSchema, current_user: dict = Depends(allow_only_admin)) -> SupplierSchema:
     supplier_repo = SupplierRepository()
     database = PostgresDatabase()
 
@@ -520,7 +537,7 @@ async def insert_supplier(supplier: SupplierSchema) -> SupplierSchema:
 
 
 @router.put("/suppliers/{id}", response_model=SupplierSchema)
-async def update_supplier_by_id(id: int, supplier: SupplierSchema) -> SupplierSchema:
+async def update_supplier_by_id(id: int, supplier: SupplierSchema, current_user: dict = Depends(allow_only_admin)) -> SupplierSchema:
     supplier_repo = SupplierRepository()
     database = PostgresDatabase()
 
@@ -535,7 +552,7 @@ async def update_supplier_by_id(id: int, supplier: SupplierSchema) -> SupplierSc
 
 
 @router.delete("/suppliers/{id}", response_model=dict)
-async def delete_supplier_by_id(id: int) -> dict:
+async def delete_supplier_by_id(id: int, current_user: dict = Depends(allow_only_admin)) -> dict:
     supplier_repo = SupplierRepository()
     database = PostgresDatabase()
 
@@ -580,7 +597,7 @@ async def get_storage_place_by_id(id: int) -> StoragePlaceSchema:
 
 
 @router.post("/storage_places", response_model=StoragePlaceSchema)
-async def insert_storage_place(storage_place: StoragePlaceSchema) -> StoragePlaceSchema:
+async def insert_storage_place(storage_place: StoragePlaceSchema, current_user: dict = Depends(allow_only_admin)) -> StoragePlaceSchema:
     storage_place_repo = StoragePlaceRepository()
     database = PostgresDatabase()
 
@@ -595,7 +612,7 @@ async def insert_storage_place(storage_place: StoragePlaceSchema) -> StoragePlac
 
 
 @router.put("/storage_places/{id}", response_model=StoragePlaceSchema)
-async def update_storage_place_by_id(id: int, storage_place: StoragePlaceSchema) -> StoragePlaceSchema:
+async def update_storage_place_by_id(id: int, storage_place: StoragePlaceSchema, current_user: dict = Depends(allow_only_admin)) -> StoragePlaceSchema:
     storage_place_repo = StoragePlaceRepository()
     database = PostgresDatabase()
 
@@ -615,7 +632,7 @@ async def update_storage_place_by_id(id: int, storage_place: StoragePlaceSchema)
 
 
 @router.delete("/storage_places/{id}", response_model=dict)
-async def delete_storage_place_by_id(id: int) -> dict:
+async def delete_storage_place_by_id(id: int, current_user: dict = Depends(allow_only_admin)) -> dict:
     storage_place_repo = StoragePlaceRepository()
     database = PostgresDatabase()
 
@@ -658,7 +675,7 @@ async def get_shipment_by_id(id: int) -> ShipmentSchema:
 
 
 @router.post("/shipments", response_model=ShipmentSchema)
-async def insert_shipment(shipment: ShipmentSchema) -> ShipmentSchema:
+async def insert_shipment(shipment: ShipmentSchema, current_user: dict = Depends(allow_only_admin)) -> ShipmentSchema:
     shipment_repo = ShipmentRepository()
     database = PostgresDatabase()
 
@@ -673,7 +690,7 @@ async def insert_shipment(shipment: ShipmentSchema) -> ShipmentSchema:
 
 
 @router.put("/shipments/{id}", response_model=ShipmentSchema)
-async def update_shipment_by_id(id: int, shipment: ShipmentSchema) -> ShipmentSchema:
+async def update_shipment_by_id(id: int, shipment: ShipmentSchema, current_user: dict = Depends(allow_only_admin)) -> ShipmentSchema:
     shipment_repo = ShipmentRepository()
     database = PostgresDatabase()
 
@@ -695,7 +712,7 @@ async def update_shipment_by_id(id: int, shipment: ShipmentSchema) -> ShipmentSc
 
 
 @router.delete("/shipments/{id}", response_model=dict)
-async def delete_shipment_by_id(id: int) -> dict:
+async def delete_shipment_by_id(id: int, current_user: dict = Depends(allow_only_admin)) -> dict:
     shipment_repo = ShipmentRepository()
     database = PostgresDatabase()
 
@@ -740,7 +757,7 @@ async def get_shipment_detail_by_id(id: int) -> ShipmentDetailSchema:
 
 
 @router.post("/shipment_details", response_model=ShipmentDetailSchema)
-async def insert_shipment_detail(shipment_detail: ShipmentDetailSchema) -> ShipmentDetailSchema:
+async def insert_shipment_detail(shipment_detail: ShipmentDetailSchema, current_user: dict = Depends(allow_only_admin)) -> ShipmentDetailSchema:
     shipment_detail_repo = ShipmentDetailRepository()
     database = PostgresDatabase()
 
@@ -755,7 +772,7 @@ async def insert_shipment_detail(shipment_detail: ShipmentDetailSchema) -> Shipm
 
 
 @router.put("/shipment_details/{id}", response_model=ShipmentDetailSchema)
-async def update_shipment_detail_by_id(id: int, shipment_detail: ShipmentDetailSchema) -> ShipmentDetailSchema:
+async def update_shipment_detail_by_id(id: int, shipment_detail: ShipmentDetailSchema, current_user: dict = Depends(allow_only_admin)) -> ShipmentDetailSchema:
     shipment_detail_repo = ShipmentDetailRepository()
     database = PostgresDatabase()
 
@@ -776,7 +793,7 @@ async def update_shipment_detail_by_id(id: int, shipment_detail: ShipmentDetailS
 
 
 @router.delete("/shipment_details/{id}", response_model=dict)
-async def delete_shipment_detail_by_id(id: int) -> dict:
+async def delete_shipment_detail_by_id(id: int, current_user: dict = Depends(allow_only_admin)) -> dict:
     shipment_detail_repo = ShipmentDetailRepository()
     database = PostgresDatabase()
 
@@ -821,7 +838,7 @@ async def get_products_in_warehouse_by_id(id: int) -> ProductsInWarehouseSchema:
 
 
 @router.post("/products_in_warehouses", response_model=ProductsInWarehouseSchema)
-async def insert_products_in_warehouse(products_in_warehouse: ProductsInWarehouseSchema) -> ProductsInWarehouseSchema:
+async def insert_products_in_warehouse(products_in_warehouse: ProductsInWarehouseSchema, current_user: dict = Depends(allow_only_admin)) -> ProductsInWarehouseSchema:
     products_in_warehouse_repo = ProductsInWarehouseRepository()
     database = PostgresDatabase()
 
@@ -836,7 +853,7 @@ async def insert_products_in_warehouse(products_in_warehouse: ProductsInWarehous
 
 
 @router.put("/products_in_warehouses/{id}", response_model=ProductsInWarehouseSchema)
-async def update_products_in_warehouse_by_id(id: int, products_in_warehouse: ProductsInWarehouseSchema) -> ProductsInWarehouseSchema:
+async def update_products_in_warehouse_by_id(id: int, products_in_warehouse: ProductsInWarehouseSchema, current_user: dict = Depends(allow_only_admin)) -> ProductsInWarehouseSchema:
     products_in_warehouse_repo = ProductsInWarehouseRepository()
     database = PostgresDatabase()
 
@@ -858,7 +875,7 @@ async def update_products_in_warehouse_by_id(id: int, products_in_warehouse: Pro
 
 
 @router.delete("/products_in_warehouses/{id}", response_model=dict)
-async def delete_products_in_warehouse_by_id(id: int) -> dict:
+async def delete_products_in_warehouse_by_id(id: int, current_user: dict = Depends(allow_only_admin)) -> dict:
     products_in_warehouse_repo = ProductsInWarehouseRepository()
     database = PostgresDatabase()
 
@@ -901,7 +918,7 @@ async def get_movement_by_id(id: int) -> MovementSchema:
 
 
 @router.post("/movements", response_model=MovementSchema)
-async def insert_movement(movement: MovementSchema) -> MovementSchema:
+async def insert_movement(movement: MovementSchema, current_user: dict = Depends(allow_only_admin)) -> MovementSchema:
     movement_repo = MovementRepository()
     database = PostgresDatabase()
 
@@ -916,7 +933,7 @@ async def insert_movement(movement: MovementSchema) -> MovementSchema:
 
 
 @router.put("/movements/{id}", response_model=MovementSchema)
-async def update_movement_by_id(id: int, movement: MovementSchema) -> MovementSchema:
+async def update_movement_by_id(id: int, movement: MovementSchema, current_user: dict = Depends(allow_only_admin)) -> MovementSchema:
     movement_repo = MovementRepository()
     database = PostgresDatabase()
 
@@ -938,7 +955,7 @@ async def update_movement_by_id(id: int, movement: MovementSchema) -> MovementSc
 
 
 @router.delete("/movements/{id}", response_model=dict)
-async def delete_movement_by_id(id: int) -> dict:
+async def delete_movement_by_id(id: int, current_user: dict = Depends(allow_only_admin)) -> dict:
     movement_repo = MovementRepository()
     database = PostgresDatabase()
 
@@ -983,7 +1000,7 @@ async def get_delivery_by_id(id: int) -> DeliverySchema:
 
 
 @router.post("/deliveries", response_model=DeliverySchema)
-async def insert_delivery(delivery: DeliverySchema) -> DeliverySchema:
+async def insert_delivery(delivery: DeliverySchema, current_user: dict = Depends(allow_only_admin)) -> DeliverySchema:
     delivery_repo = DeliveryRepository()
     database = PostgresDatabase()
 
@@ -998,7 +1015,7 @@ async def insert_delivery(delivery: DeliverySchema) -> DeliverySchema:
 
 
 @router.put("/deliveries/{id}", response_model=DeliverySchema)
-async def update_delivery_by_id(id: int, delivery: DeliverySchema) -> DeliverySchema:
+async def update_delivery_by_id(id: int, delivery: DeliverySchema, current_user: dict = Depends(allow_only_admin)) -> DeliverySchema:
     delivery_repo = DeliveryRepository()
     database = PostgresDatabase()
 
@@ -1018,7 +1035,7 @@ async def update_delivery_by_id(id: int, delivery: DeliverySchema) -> DeliverySc
 
 
 @router.delete("/deliveries/{id}", response_model=dict)
-async def delete_delivery_by_id(id: int) -> dict:
+async def delete_delivery_by_id(id: int, current_user: dict = Depends(allow_only_admin)) -> dict:
     delivery_repo = DeliveryRepository()
     database = PostgresDatabase()
 
@@ -1063,7 +1080,7 @@ async def get_delivery_detail_by_id(id: int) -> DeliveryDetailSchema:
 
 
 @router.post("/delivery_details", response_model=DeliveryDetailSchema)
-async def insert_delivery_detail(delivery_detail: DeliveryDetailSchema) -> DeliveryDetailSchema:
+async def insert_delivery_detail(delivery_detail: DeliveryDetailSchema, current_user: dict = Depends(allow_only_admin)) -> DeliveryDetailSchema:
     delivery_detail_repo = DeliveryDetailRepository()
     database = PostgresDatabase()
 
@@ -1078,7 +1095,7 @@ async def insert_delivery_detail(delivery_detail: DeliveryDetailSchema) -> Deliv
 
 
 @router.put("/delivery_details/{id}", response_model=DeliveryDetailSchema)
-async def update_delivery_detail_by_id(id: int, delivery_detail: DeliveryDetailSchema) -> DeliveryDetailSchema:
+async def update_delivery_detail_by_id(id: int, delivery_detail: DeliveryDetailSchema, current_user: dict = Depends(allow_only_admin)) -> DeliveryDetailSchema:
     delivery_detail_repo = DeliveryDetailRepository()
     database = PostgresDatabase()
 
@@ -1099,7 +1116,7 @@ async def update_delivery_detail_by_id(id: int, delivery_detail: DeliveryDetailS
 
 
 @router.delete("/delivery_details/{id}", response_model=dict)
-async def delete_delivery_detail_by_id(id: int) -> dict:
+async def delete_delivery_detail_by_id(id: int, current_user: dict = Depends(allow_only_admin)) -> dict:
     delivery_detail_repo = DeliveryDetailRepository()
     database = PostgresDatabase()
 

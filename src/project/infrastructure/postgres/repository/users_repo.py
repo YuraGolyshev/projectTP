@@ -1,14 +1,16 @@
 from typing import Type
+
+from fastapi import HTTPException
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text, select
 from sqlalchemy.testing.pickleable import User
+
+from project.infrastructure.security.JWT_token import create_access_token
+from project.infrastructure.security.bcrypt import hash_password, verify_password
 from project.schemas.user import UserSchema
 from project.infrastructure.postgres.models import Users
 from project.core.config import settings
-from fastapi import HTTPException
-from project.infrastructure.security.bcrypt import hash_password, verify_password
-from sqlalchemy.exc import IntegrityError
-from src.project.infrastructure.security.JWT_token import create_access_token
 
 
 class UsersRepository:
@@ -75,11 +77,12 @@ class UsersRepository:
         query = text(f"SELECT 1 FROM {settings.POSTGRES_SCHEMA}.users WHERE email = :email LIMIT 1")
         result = await session.execute(query, {"email": email})
         existing_user = result.scalar_one_or_none()
+
         if existing_user:
             raise HTTPException(status_code=400, detail="User with this email already exists")
+
         # If user does not exist, insert the new user
         password_hash = hash_password(password)
-
 
         query = text(f"""
             INSERT INTO {settings.POSTGRES_SCHEMA}.users (name, email, password_hash, role) 
@@ -94,18 +97,18 @@ class UsersRepository:
                                                    "role": role})
             user_row = result.mappings().first()
 
-        if user_row:
-            return UserSchema.model_validate(dict(user_row))
-        return None
+            if user_row:
+                return UserSchema.model_validate(dict(user_row))
+            return None
 
-    except IntegrityError:
-        raise HTTPException(status_code=400, detail="Error while registering the user")
+        except IntegrityError:
+            raise HTTPException(status_code=400, detail="Error while registering the user")
 
     async def login_user(
-            self,
-            session: AsyncSession,
-            email: str,
-            password: str
+        self,
+        session: AsyncSession,
+        email: str,
+        password: str
     ) -> dict:
         user = await self.get_user_by_email(session=session, email=email)
         if not user:
@@ -113,7 +116,9 @@ class UsersRepository:
 
         if not verify_password(password, user.password_hash):
             raise HTTPException(status_code=401, detail="Invalid password")
+
         token = create_access_token({"user_id": user.id, "role":user.role})
+
         return {"user": user, "access_token": token, "token_type": "bearer"}
 
     async def delete_user_by_id(
