@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3c17e448-55e9-473d-8751-b9a85350f872" name="Changes" comment="2.1.0: Добавлена таблица users и регестрация для users">
+    <list default="true" id="3c17e448-55e9-473d-8751-b9a85350f872" name="Changes" comment="2.1.0: login_user теперь также сравните пароли">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Changelog.md" beforeDir="false" afterPath="$PROJECT_DIR$/Changelog.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migration/versions/10b9633df21a_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/project/api/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/api/routes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/project/infrastructure/postgres/repository/users_repo.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/infrastructure/postgres/repository/users_repo.py" afterDir="false" />
     </list>
@@ -168,7 +171,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734464612725</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="2.1.0: login_user теперь также сравните пароли">
+      <option name="closed" value="true" />
+      <created>1734465090550</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1734465090550</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -192,6 +203,17 @@
     <MESSAGE value="1.1.6: Добавил файлы, которые должны были быть в прошлом коммите" />
     <MESSAGE value="2.0.0: Добавлены все таблицы и все ручки. Обновлена миграция(ранее не работала)." />
     <MESSAGE value="2.1.0: Добавлена таблица users и регестрация для users" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.1.0: Добавлена таблица users и регестрация для users" />
+    <MESSAGE value="2.1.0: login_user теперь также сравните пароли" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.1.0: login_user теперь также сравните пароли" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/migration/env.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

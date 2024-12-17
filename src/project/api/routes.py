@@ -28,34 +28,36 @@ from project.schemas.storage_place import StoragePlaceSchema
 from project.infrastructure.postgres.repository.storage_place_repo import StoragePlaceRepository
 from project.infrastructure.postgres.repository.users_repo import UsersRepository
 from project.schemas.user import UserSchema
+from project.schemas.login import LoginSchema
+from project.schemas.register import RegisterSchema
 router = APIRouter()
 
 # Registration of User
 @router.post("/register", response_model=UserSchema)
-async def register(user: UserSchema) -> UserSchema:
+async def register(user: RegisterSchema) -> UserSchema:
     users_repo = UsersRepository()
     database = PostgresDatabase()
 
-    if user.role != "admin" and user.role != "user":
+    if user.role not in ["user", "admin"]:
         raise HTTPException(status_code=400, detail="role can be only 'user' or 'admin'")
     async with database.session() as session:
         await users_repo.check_connection(session=session)
-        user = await users_repo.register_user(session=session,
-                                              name=user.name,
-                                              email=user.email,
-                                              password_hash=user.password_hash,
-                                              role=user.role)
-    if not user:
+        new_user = await users_repo.register_user(session=session,
+                                                  name=user.name,
+                                                  email=user.email,
+                                                  password=user.password,
+                                                  role=user.role)
+    if not new_user:
         raise HTTPException(status_code=500, detail="Failed to register user")
-    return user
+    return new_user
 
 @router.post("/login", response_model=UserSchema)
-async def login(user: UserSchema) -> UserSchema:
+async def login(user: LoginSchema) -> UserSchema:
     users_repo = UsersRepository()
     database = PostgresDatabase()
     async with database.session() as session:
         await users_repo.check_connection(session=session)
-        find_user = await users_repo.login_user(session=session, email=user.email, password=user.password_hash)
+        find_user = await users_repo.login_user(session=session, email=user.email, password=user.password)
     if not find_user:
         raise HTTPException(status_code=400, detail="User is not found")
     return find_user

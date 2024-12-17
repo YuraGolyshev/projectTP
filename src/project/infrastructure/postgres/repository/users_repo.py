@@ -4,7 +4,8 @@ from sqlalchemy import text
 from project.schemas.user import UserSchema
 from project.infrastructure.postgres.models import Users
 from project.core.config import settings
-
+from fastapi import HTTPException
+from project.infrastructure.security.bcrypt import hash_password, verify_password
 
 class UsersRepository:
     _collection: Type[Users] = Users
@@ -56,18 +57,20 @@ class UsersRepository:
         session: AsyncSession,
         name: str,
         email: str,
-        password_hash: str,
+        password: str,
         role: str
     ) -> UserSchema | None:
 
-        if role != "user" and role != "admin":
-            return None
+        if role not in ["user", "admin"]:
+            raise HTTPException(status_code=400, detail="Invalid role")
         query = text(f"""
             INSERT INTO {settings.POSTGRES_SCHEMA}.users (name, email, password_hash, role) 
             VALUES (:name, :email, :password_hash, :role)
             RETURNING id, name, email, password_hash, role
         """)
 
+        # пользователь указывает password, мы его хэшируем и кладем в бд password_hash
+        password_hash = hash_password(password)
         result = await session.execute(query, {"name": name,
                                                "email": email,
                                                "password_hash": password_hash,
@@ -83,17 +86,16 @@ class UsersRepository:
             email: str,
             password: str
     ) -> UserSchema | None:
-        query = text(f"""
-            SELECT * FROM {settings.POSTGRES_SCHEMA}.users
-            WHERE email = :email AND password_hash = :password_hash
-        """)
-        password_hash = password
-        result = await session.execute(query, {"email": email, "password_hash": password_hash})
-
-        user_row = result.mappings().first()
-        if user_row:
-            return UserSchema.model_validate(dict(user_row))
-        return None
+        user = await self.get_user_by_email(session=session, email=email)
+        if not user:
+            raise HTTPException(status_code=404, detail="User with such email not found")
+        print(password, " ", user.password_hash)
+        if not verify_password(password, user.password_hash):
+            raise HTTPException(status_code=401, detail="Invalid password")
+        # TODO: нужно создать, вернуть токен и добавить его в бд
+        # token = seft.create_jwt_token(user.id, user.role)
+        # return {"user": user, "token": token}
+        return user
 
     async def delete_user_by_id(
         self,
