@@ -4,16 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3c17e448-55e9-473d-8751-b9a85350f872" name="Changes" comment="1.1.6: Добавил файлы, которые должны были быть в прошлом коммите">
+    <list default="true" id="3c17e448-55e9-473d-8751-b9a85350f872" name="Changes" comment="2.0.0: Добавлены все таблицы и все ручки. Обновлена миграция(ранее не работала).">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migration/README" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migration/env.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migration/script.py.mako" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migration/versions/9d09e1cb9b76_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migration/versions/e1bac34b0063_test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Changelog.md" beforeDir="false" afterPath="$PROJECT_DIR$/Changelog.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migration/versions/71cad48600e9_initial.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/project/api/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/api/routes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/project/infrastructure/postgres/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/infrastructure/postgres/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/infrastructure/postgres/repository/client_repo.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/infrastructure/postgres/repository/client_repo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +38,9 @@
     &quot;accountId&quot;: &quot;98324129-8de2-42bf-8863-b4ce7de95abb&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -154,7 +153,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733312448717</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="2.0.0: Добавлены все таблицы и все ручки. Обновлена миграция(ранее не работала).">
+      <option name="closed" value="true" />
+      <created>1733939367965</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1733939367965</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -176,6 +183,7 @@
     <MESSAGE value="1.0.0: Docker запускается, swagger открывается" />
     <MESSAGE value="1.1.5: Очень много исправлений и добавлена таблица producers" />
     <MESSAGE value="1.1.6: Добавил файлы, которые должны были быть в прошлом коммите" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.1.6: Добавил файлы, которые должны были быть в прошлом коммите" />
+    <MESSAGE value="2.0.0: Добавлены все таблицы и все ручки. Обновлена миграция(ранее не работала)." />
+    <option name="LAST_COMMIT_MESSAGE" value="2.0.0: Добавлены все таблицы и все ручки. Обновлена миграция(ранее не работала)." />
   </component>
 </project>

@@ -1,8 +1,8 @@
 """initial
 
-Revision ID: 71cad48600e9
+Revision ID: 10b9633df21a
 Revises: 
-Create Date: 2024-12-11 20:47:01.573660
+Create Date: 2024-12-17 23:32:25.146014
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '71cad48600e9'
+revision: str = '10b9633df21a'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -46,6 +46,16 @@ def upgrade() -> None:
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String().with_variant(sa.String(length=255), 'postgresql'), nullable=False),
     sa.PrimaryKeyConstraint('id'),
+    schema='public'
+    )
+    op.create_table('users',
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+    sa.Column('name', sa.String().with_variant(sa.String(length=255), 'postgresql'), nullable=False),
+    sa.Column('email', sa.String().with_variant(sa.String(length=255), 'postgresql'), nullable=False),
+    sa.Column('role', sa.String().with_variant(sa.String(length=255), 'postgresql'), nullable=False),
+    sa.Column('password_hash', sa.String().with_variant(sa.String(length=255), 'postgresql'), nullable=False),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('email'),
     schema='public'
     )
     op.create_table('warehouses',
@@ -161,6 +171,7 @@ def downgrade() -> None:
     op.drop_table('products', schema='public')
     op.drop_table('deliveries', schema='public')
     op.drop_table('warehouses', schema='public')
+    op.drop_table('users', schema='public')
     op.drop_table('suppliers', schema='public')
     op.drop_table('product_groups', schema='public')
     op.drop_table('producers', schema='public')

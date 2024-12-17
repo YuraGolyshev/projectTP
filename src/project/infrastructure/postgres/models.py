@@ -4,6 +4,14 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from project.infrastructure.postgres.database import Base
 
+class Users(Base):
+    __tablename__ = 'users'
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    name: Mapped[str] = mapped_column(nullable=False)
+    email: Mapped[str] = mapped_column(nullable=False, unique=True)
+    role: Mapped[str] = mapped_column(nullable=False)
+    password_hash: Mapped[str] = mapped_column(nullable=False)
+
 
 class Client(Base):
     __tablename__ = "clients"
