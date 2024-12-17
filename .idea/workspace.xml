@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3c17e448-55e9-473d-8751-b9a85350f872" name="Changes" comment="2.1.0: login_user теперь также сравните пароли">
+    <list default="true" id="3c17e448-55e9-473d-8751-b9a85350f872" name="Changes" comment="2.3.0: хеш-пароль при входе и регистрации">
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Changelog.md" beforeDir="false" afterPath="$PROJECT_DIR$/Changelog.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migration/versions/10b9633df21a_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/api/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/api/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/infrastructure/postgres/repository/users_repo.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/infrastructure/postgres/repository/users_repo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/infrastructure/security/JWT_token_generate.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/infrastructure/security/JWT_token_generate.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,7 +176,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734465090550</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="2.3.0: хеш-пароль при входе и регистрации">
+      <option name="closed" value="true" />
+      <created>1734467715490</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1734467715490</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -204,7 +209,8 @@
     <MESSAGE value="2.0.0: Добавлены все таблицы и все ручки. Обновлена миграция(ранее не работала)." />
     <MESSAGE value="2.1.0: Добавлена таблица users и регестрация для users" />
     <MESSAGE value="2.1.0: login_user теперь также сравните пароли" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.1.0: login_user теперь также сравните пароли" />
+    <MESSAGE value="2.3.0: хеш-пароль при входе и регистрации" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.3.0: хеш-пароль при входе и регистрации" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
