@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3c17e448-55e9-473d-8751-b9a85350f872" name="Changes" comment="2.0.0: Добавлены все таблицы и все ручки. Обновлена миграция(ранее не работала).">
+    <list default="true" id="3c17e448-55e9-473d-8751-b9a85350f872" name="Changes" comment="2.1.0: Добавлена таблица users и регестрация для users">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Changelog.md" beforeDir="false" afterPath="$PROJECT_DIR$/Changelog.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migration/versions/71cad48600e9_initial.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/project/api/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/api/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/infrastructure/postgres/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/infrastructure/postgres/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/infrastructure/postgres/repository/users_repo.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/infrastructure/postgres/repository/users_repo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,7 +160,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733939367965</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="2.1.0: Добавлена таблица users и регестрация для users">
+      <option name="closed" value="true" />
+      <created>1734464612725</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1734464612725</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,6 +191,7 @@
     <MESSAGE value="1.1.5: Очень много исправлений и добавлена таблица producers" />
     <MESSAGE value="1.1.6: Добавил файлы, которые должны были быть в прошлом коммите" />
     <MESSAGE value="2.0.0: Добавлены все таблицы и все ручки. Обновлена миграция(ранее не работала)." />
-    <option name="LAST_COMMIT_MESSAGE" value="2.0.0: Добавлены все таблицы и все ручки. Обновлена миграция(ранее не работала)." />
+    <MESSAGE value="2.1.0: Добавлена таблица users и регестрация для users" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.1.0: Добавлена таблица users и регестрация для users" />
   </component>
 </project>

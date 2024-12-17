@@ -55,7 +55,7 @@ async def login(user: UserSchema) -> UserSchema:
     database = PostgresDatabase()
     async with database.session() as session:
         await users_repo.check_connection(session=session)
-        find_user = await users_repo.get_user_by_email(session=session, email=user.email)
+        find_user = await users_repo.login_user(session=session, email=user.email, password=user.password_hash)
     if not find_user:
         raise HTTPException(status_code=400, detail="User is not found")
     return find_user

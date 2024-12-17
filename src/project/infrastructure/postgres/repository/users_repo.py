@@ -77,6 +77,24 @@ class UsersRepository:
             return UserSchema.model_validate(dict(user_row))
         return None
 
+    async def login_user(
+            self,
+            session: AsyncSession,
+            email: str,
+            password: str
+    ) -> UserSchema | None:
+        query = text(f"""
+            SELECT * FROM {settings.POSTGRES_SCHEMA}.users
+            WHERE email = :email AND password_hash = :password_hash
+        """)
+        password_hash = password
+        result = await session.execute(query, {"email": email, "password_hash": password_hash})
+
+        user_row = result.mappings().first()
+        if user_row:
+            return UserSchema.model_validate(dict(user_row))
+        return None
+
     async def delete_user_by_id(
         self,
         session: AsyncSession,
