@@ -1,21 +1,27 @@
 from pydantic_settings import BaseSettings
-from pydantic import SecretStr
+from pydantic import SecretStr, ValidationError
 
+from dotenv import load_dotenv
+load_dotenv()
 
 class Settings(BaseSettings):
-    # TODO убрать значения по умолчанию при переносе приложения в Docker
-    ORIGINS: str = "*"
+    ORIGINS: str = ""
     ROOT_PATH: str = ""
-    ENV: str = "DEV"
-    LOG_LEVEL: str = "DEBUG"
+    ENV: str = ""
+    LOG_LEVEL: str = ""
 
-    POSTGRES_SCHEMA: str = "public"
-    POSTGRES_HOST: str = "localhost"
-    POSTGRES_DB: str = "postgres"
-    POSTGRES_PORT: int = 5678
-    POSTGRES_USER: SecretStr = "postgres"
-    POSTGRES_PASSWORD: SecretStr = "postgres"
+    POSTGRES_SCHEMA: str
+    POSTGRES_HOST: str
+    POSTGRES_DB: str
+    POSTGRES_PORT: int
+    POSTGRES_USER: SecretStr
+    POSTGRES_PASSWORD: SecretStr
     POSTGRES_RECONNECT_INTERVAL_SEC: int = 1
+
+    # JWT tokens
+    JWT_SECRET_KEY: SecretStr  # чтобы скрыть значение при логах
+    HASH_ALGORITHM: str
+    ACCESS_TOKEN_EXPIRE_MINUTES: int
 
     @property
     def postgres_url(self) -> str:
@@ -23,4 +29,9 @@ class Settings(BaseSettings):
         return f"postgresql+asyncpg://{creds}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
 
 
-settings = Settings()
+try:
+    settings = Settings()
+    print("Настройки успешно загружены.")
+
+except ValidationError as e:
+    print("Ошибка валидации:", e)
